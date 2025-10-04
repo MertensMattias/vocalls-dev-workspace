@@ -130,9 +130,9 @@ class VocallsProjectBuilder {
   
   generateMonolith() {
     const header = this.generateHeader();
-    const body = this.sections.map(section => section.content).join('\\n\\n');
+    const body = this.sections.map(section => section.content).join('\n\n');
     
-    return `${header}\\n\\n${body}`;
+    return `${header}\n\n${body}`;
   }
   
   generateHeader() {
@@ -160,11 +160,11 @@ class VocallsProjectBuilder {
   
   addSection(name, content, filePath) {
     const cleanContent = this.cleanContent(content);
-    const sectionHeader = `// ========================================\\n// ${name}\\n// Source: ${filePath}\\n// ========================================`;
+    const sectionHeader = `// ========================================\n// ${name}\n// Source: ${filePath}\n// ========================================`;
     
     this.sections.push({
       name,
-      content: `${sectionHeader}\\n${cleanContent}`,
+      content: `${sectionHeader}\n${cleanContent}`,
       filePath
     });
     
@@ -176,9 +176,9 @@ class VocallsProjectBuilder {
     // Remove excessive comments and whitespace for production builds
     if (this.options.prod) {
       return content
-        .replace(/\\/\\*[\\s\\S]*?\\*\\//g, '') // Remove block comments
-        .replace(/\\/\\/.*$/gm, '') // Remove line comments
-        .replace(/\\n\\s*\\n\\s*\\n/g, '\\n\\n') // Reduce multiple empty lines
+        .replace(/\/\*[\s\S]*?\*\//g, '') // Remove block comments
+        .replace(/\/\/.*$/gm, '') // Remove line comments
+        .replace(/\n\s*\n\s*\n/g, '\n\n') // Reduce multiple empty lines
         .trim();
     }
     return content.trim();
@@ -188,7 +188,7 @@ class VocallsProjectBuilder {
     const violations = validateES51Compliance(content);
     
     if (violations.length > 0) {
-      error(`\\n❌ ES5.1 compliance violations found:`);
+      error(`\n❌ ES5.1 compliance violations found:`);
       violations.slice(0, 10).forEach(v => {
         error(`   Line ${v.line}: ${v.message}`);
         error(`   Code: ${v.snippet}`);

@@ -21,7 +21,7 @@
     "clean": "npm run voc clean",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "node --test",
+    "test": "node --test test/core.test.js",
     "prepare": "husky install"
   },
   "devDependencies": {
