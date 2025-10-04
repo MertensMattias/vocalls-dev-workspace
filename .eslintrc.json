@@ -1,0 +1,65 @@
+{
+  "env": {
+    "es2022": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "node"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": "error",
+    "curly": "error",
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "strict": ["error", "never"],
+    
+    "node/no-missing-import": "error",
+    "node/no-unsupported-features/es-syntax": "error",
+    "node/no-unsupported-features/node-builtins": "error",
+    
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "ImportDeclaration[source.value=/\\.ts$/]",
+        "message": "TypeScript imports are not allowed. This is a pure JavaScript environment."
+      },
+      {
+        "selector": "Program > VariableDeclaration[kind='var']",
+        "message": "Use 'const' or 'let' instead of 'var' in modern JavaScript development."
+      }
+    ],
+    
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["typescript", "ts-*", "@types/*"],
+            "message": "TypeScript dependencies are not allowed in this pure JavaScript environment."
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["migrate-*.js", "scripts/*.js"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

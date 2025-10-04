@@ -1,0 +1,30 @@
+{
+  "name": "vocalls-core",
+  "version": "2.0.0",
+  "description": "Vocalls development environment core",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./builder": "./src/builder/index.js",
+    "./simulator": "./src/simulator/index.js",
+    "./debugger": "./src/debugger/index.js"
+  },
+  "bin": {
+    "voc": "./bin/voc.mjs"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "keywords": [
+    "vocalls",
+    "build-tool",
+    "simulation",
+    "es5"
+  ],
+  "author": "Your Company",
+  "license": "MIT"
+}

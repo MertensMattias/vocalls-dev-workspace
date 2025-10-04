@@ -1,0 +1,54 @@
+{
+  "name": "vocalls-dev-workspace",
+  "version": "2.0.0",
+  "description": "Multi-project Vocalls development environment",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "core",
+    "projects/*"
+  ],
+  "engines": {
+    "node": ">=18.18.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "voc": "node core/bin/voc.mjs",
+    "new": "npm run voc new",
+    "build": "npm run voc build",
+    "sim": "npm run voc sim",
+    "debug": "npm run voc debug",
+    "clean": "npm run voc clean",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "node --test",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "prettier": "^3.2.5",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  },
+  "lint-staged": {
+    "*.{js,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "vocalls",
+    "ivr",
+    "call-center",
+    "javascript",
+    "es5",
+    "simulation"
+  ],
+  "author": "Your Company",
+  "license": "MIT"
+}
