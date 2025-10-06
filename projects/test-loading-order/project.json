@@ -1,0 +1,23 @@
+{
+  "name": "test-loading-order",
+  "customer": "Unknown Customer",
+  "description": "Vocalls IVR project for test-loading-order",
+  "version": "1.0.0",
+  "created": "2025-10-06T06:28:05.195Z",
+  "libraryOrder": [],
+  "environments": {
+    "acc": {
+      "apiBase": "https://api.example.com",
+      "schedulerId": null
+    },
+    "prd": {
+      "apiBase": "https://api.example.com",
+      "schedulerId": null
+    }
+  },
+  "features": {
+    "intentDetection": true,
+    "cdbLogging": true,
+    "segmentLogging": true
+  }
+}

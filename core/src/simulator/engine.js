@@ -12,6 +12,7 @@
 import { promises as fs } from 'fs';
 import { join } from 'path';
 import vm from 'vm';
+import { sortLibraryFilesWithDependencies } from '../utils/sorting.js';
 
 export class VocallsSimulator {
   constructor(options = {}) {
@@ -182,7 +183,10 @@ export class VocallsSimulator {
     const libsDir = join(this.projectPath, 'src', 'globalLibraries', 'active');
     if (await this.fileExists(libsDir)) {
       const config = await this.loadProjectConfig();
-      const libraryOrder = config.libraryOrder || await this.getLibraryFiles(libsDir);
+      const allFiles = await this.getLibraryFiles(libsDir);
+      
+      // Sort according to Vocalls loading order (numeric then alphabetical)
+      const libraryOrder = sortLibraryFilesWithDependencies(allFiles, config.libraryOrder);
       
       for (const lib of libraryOrder) {
         loadOrder.push(`src/globalLibraries/active/${lib}`);
@@ -350,9 +354,7 @@ export class VocallsSimulator {
   async getLibraryFiles(libsDir) {
     try {
       const files = await fs.readdir(libsDir);
-      return files
-        .filter(file => file.endsWith('.js'))
-        .sort(); // Alphabetical fallback
+      return files.filter(file => file.endsWith('.js'));
     } catch {
       return [];
     }

@@ -13,6 +13,7 @@ import { join, resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { findWorkspaceRoot, findProject, log, error } from '../utils/workspace.js';
 import { validateES51Compliance } from '../utils/validation.js';
+import { sortLibraryFilesWithDependencies } from '../utils/sorting.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -105,8 +106,11 @@ class VocallsProjectBuilder {
     const libsDir = join(this.projectPath, 'src', 'globalLibraries', 'active');
     
     if (await this.fileExists(libsDir)) {
-      // Get dependency order from config or use alphabetical
-      const files = this.config.libraryOrder || await this.getLibraryFiles(libsDir);
+      // Get all library files
+      const allFiles = await this.getLibraryFiles(libsDir);
+      
+      // Sort according to Vocalls loading order (numeric then alphabetical)
+      const files = sortLibraryFilesWithDependencies(allFiles, this.config.libraryOrder);
       
       for (const file of files) {
         const filePath = join(libsDir, file);
@@ -206,9 +210,7 @@ class VocallsProjectBuilder {
   
   async getLibraryFiles(libsDir) {
     const files = await fs.readdir(libsDir);
-    return files
-      .filter(file => file.endsWith('.js'))
-      .sort(); // Alphabetical order as fallback
+    return files.filter(file => file.endsWith('.js'));
   }
   
   async fileExists(path) {
