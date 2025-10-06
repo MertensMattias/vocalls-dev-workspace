@@ -1,0 +1,28 @@
+{
+  "name": "test-project-with-special-chars-!@#$%^&*()",
+  "customer": "Unknown Customer",
+  "description": "Vocalls IVR project for test-project-with-special-chars-!@#$%^&*()",
+  "version": "1.0.0",
+  "created": "2025-10-06T06:29:12.402Z",
+  "libraryOrder": [
+    "globalApiDic.js",
+    "globalIntentDefinitions.js",
+    "globalLineConfig.js",
+    "globalSegmentConfig.js"
+  ],
+  "environments": {
+    "acc": {
+      "apiBase": "https://api.example.com",
+      "schedulerId": null
+    },
+    "prd": {
+      "apiBase": "https://api.example.com",
+      "schedulerId": null
+    }
+  },
+  "features": {
+    "intentDetection": true,
+    "cdbLogging": true,
+    "segmentLogging": true
+  }
+}
